@@ -2,5 +2,5 @@ The Amazing Gif Generator
 -------------
 
 Made in an hour, improved over many
-Check it out!
 
+[Click here](http://gifgeneration.herokuapp.com) to see it in action
