@@ -20,9 +20,15 @@ class GifGenerator < Sinatra::Base
   end
 
   post '/form' do
+    @query = params[:gif]
+
     response = conn.get "/v1/gifs/search?q=#{@query}&api_key=dc6zaTOxFJmzC"
     body = JSON.parse(response.body)
+
     @gifs = body['data']
+    if @gifs.empty?
+      redirect '/'
+    end
 
     image_urls = @gifs.map do |gif|
       gif['images']['original']['url']
