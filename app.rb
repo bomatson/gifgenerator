@@ -4,7 +4,6 @@ require 'json'
 
 class GifGenerator < Sinatra::Base
   set :static, true
-  set :public_dir, '/public'
 
   configure :production, :development do
     enable :logging
