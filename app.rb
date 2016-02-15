@@ -1,6 +1,5 @@
 require 'sinatra/base'
 require 'giphy'
-require 'debugger'
 
 class GifGenerator < Sinatra::Base
   set :static, true
