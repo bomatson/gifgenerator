@@ -1,3 +1,8 @@
 %img{src: @image_url}
-%p Refresh to get a new one!
-%a{href: url('/')} New search
+
+%p.text Refresh to get a new one!
+
+.input-group
+  %input{type: 'text', class: 'form-control copy-input', value: @image_url }
+    %span.input-group-btn
+      %button{ class: 'btn btn-default copy-btn', type: 'button' } Copy!

@@ -1,6 +1,6 @@
 require 'sinatra/base'
-require 'faraday'
-require 'json'
+require 'giphy'
+require 'debugger'
 
 class GifGenerator < Sinatra::Base
   set :static, true
@@ -9,31 +9,19 @@ class GifGenerator < Sinatra::Base
     enable :logging
   end
 
-  conn = Faraday.new(url: 'http://api.giphy.com') do |c|
-    c.use Faraday::Request::UrlEncoded
-    c.use Faraday::Adapter::NetHttp
-  end
-
   get '/' do
-    haml :form
+    haml :gif
   end
 
-  post '/form' do
-    @query = params[:gif]
+  get '/gif' do
+    query = params[:gif]
 
-    response = conn.get "/v1/gifs/search?q=#{@query}&limit=50&api_key=dc6zaTOxFJmzC"
-    body = JSON.parse(response.body)
-
-    @gifs = body['data']
-    if @gifs.empty?
-      redirect '/', 'nothing found!'
+    begin
+      gif = Giphy.random(query)
+      @image_url = gif.image_url.to_s
+      haml :image
+    rescue TypeError
+      haml :gif
     end
-
-    image_urls = @gifs.map do |gif|
-      gif['images']['original']['url']
-    end
-
-    @image_url = image_urls.sample
-    haml :image
   end
 end

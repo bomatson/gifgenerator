@@ -11,15 +11,20 @@
   %body
     .container
       .header
-        %h1.text-muted Gif Generator
-        %p Search for any topic and enjoy your new gif :)
+        %a{ href: url('/') }
+          %h1.text-muted Gif Generator
+          %p Search for any topic and enjoy your new gif :)
       .gifness.jumbotron
         = yield
       .footer
-        %i
-          something
-        %a{href: 'http://github.com/bomatson'} Bobby
-        made
-    %script{:src => "https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"}
-    %script{ src:"//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"}
+        .tag
+          %i
+            something
+          %a{href: 'http://bomatson.com'} Bobby
+          made
+        .attribution
+          %img{ src: '/images/giphy.png' }
+
+    %script{ src: "https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"}
+    %script{ src: "//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"}
     %script{ src: "/javascripts/application.js" }
